@@ -1,8 +1,12 @@
 #include <iostream>
+#include <string>
 #include "curl/curl.h"
 #include "json/json.h"
 
 using namespace std;
+
+const string FROM = "BerlinBlog";
+const string KEY = "961509756";
 
 void usage()
 {
@@ -26,9 +30,8 @@ int main(int argc, char *argv[])
 		exit(0);
 	}
 	string buffer;
-	string translate_url = "http://fanyi.youdao.com/openapi.do?keyfrom=xxxxxx&key=xxxxxx&type=data&doctype=json&version=1.1&q=";
+	string translate_url = "http://fanyi.youdao.com/openapi.do?keyfrom=" + FROM + "&key=" + KEY + "&type=data&doctype=json&version=1.1&q=";
 	CURL * curl;
-	CURLcode res;
 	curl = curl_easy_init();
 
 	int type;
@@ -48,7 +51,7 @@ int main(int argc, char *argv[])
 		curl_easy_setopt(curl, CURLOPT_URL, translate_url.c_str());
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writer);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
-		res = curl_easy_perform(curl);
+		curl_easy_perform(curl);
 		curl_easy_cleanup(curl);
 	}
 	if (buffer.empty())
@@ -80,7 +83,7 @@ int main(int argc, char *argv[])
 	const char *prefix = type == 0 ? "[" : "英[";
 	cout << argv[1] << "\t" << prefix << phonetic.asString()  << "]" << endl;
 	
-	for(int i = 0; i < explains.size(); ++i)
+	for(unsigned int i = 0; i < explains.size(); ++i)
 		cout << explains[i].asString() << endl;
 
 	return 0;
