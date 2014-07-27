@@ -1,0 +1,1 @@
+/usr/bin/c++    -Wall    CMakeFiles/translate.dir/translate.cc.o  -o translate  -L/home/berlin/Documents/jsoncpp/libs  -L/home/berlin/Documents/curl-7.37.1/build/lib -rdynamic -ljson_linux-gcc -lcurl -Wl,-rpath,/home/berlin/Documents/jsoncpp/libs:/home/berlin/Documents/curl-7.37.1/build/lib 
